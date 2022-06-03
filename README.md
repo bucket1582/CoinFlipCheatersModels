@@ -14,7 +14,7 @@ $$ fairness := P(\text{The coin is fair}|X = x) = \dfrac{b(x; n, p_{fair})p_{coi
 
 where $b(x; n, p)$ is the probability mass function of the binomial distribution. Since $ P(\text{The coin is unfair}|X = x) = 1 - fairness$, if $fairness > \dfrac{1}{2}$, we can conclude that the coin is more likely to be fair. Otherwise, we may conclude that the coin is more likely to be unfair.
 
-If we label right, we get 1 point and 15 flip chances. Otherwise we lose 30 flip chances. Consider only the flipping chances. If we flip once, we lose 1 flipping chance. Thus, we can evaluate the labeling process by below formula.
+If we label right, we get 1 point and 15 flip chances. Otherwise we lose 30 flip chances. Let's consider only the flipping chances. If we flip once, we lose 1 flipping chance. We may gain or lose the flipping chances by labeling. Thus, we can evaluate the labeling process by below formula.
 
 $$ reward := \begin{cases}
 15 \ \ \ \ \ \text{if the label is correct} \\
