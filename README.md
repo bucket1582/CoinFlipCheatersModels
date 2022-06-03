@@ -77,6 +77,28 @@ p_{cheat} \ \ \ \ \ \text{o.w.}
 
 In some cases the elastic model outperforms the biased model. In most cases though, the biased model outperforms the elastic model. The simple model is far behind.
 
+## Cheat Sheet
+Below is the cheat sheet built by using biased model.
+
+| $n$ | $x$ | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ | $13$ | $14$ | $15$ |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :--: | :--: | :--: | :--: | :--: | :--: |
+| $0$ | | Continue |
+| $1$ | | Fair | Continue |
+| $2$ | | Fair | Continue | Cheat |
+| $3$ | | Fair | Fair | Continue | Cheat |
+| $4$ | | Fair | Fair | Fair | Continue | Cheat |
+| $5$ | | Fair | Fair | Fair | Continue | Cheat | Cheat |
+| $6$ | | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat |
+| $7$ | | Fair | Fair | Fair | Fair | Continue | Continue | Cheat | Cheat |
+| $8$ | | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat |
+| $9$ | | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat |
+| $10$ | | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat |
+| $11$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat |
+| $12$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat |
+| $13$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat | Cheat |
+| $14$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat | Cheat | Cheat |
+| $15$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat | Cheat | Cheat | Cheat |
+
 ## Post Script (... p.s.)
 By the way, the game is well designed. The 'generally' expected rewards are calculated as below.
 
