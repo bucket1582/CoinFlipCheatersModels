@@ -72,3 +72,7 @@ p_{fair} \ \ \ \ \ \text{if } fairness > 0.5 \text{ for } n, x \\
 p_{cheat} \ \ \ \ \ \text{o.w.}
 \end{cases} $$
 
+## Model Result (After 10000 simulations)
+![model result](model_test_result.PNG)
+
+In some cases the elastic model outperforms the biased model. In most cases though, the biased model outperforms the elastic model. The simple model is far behind.
