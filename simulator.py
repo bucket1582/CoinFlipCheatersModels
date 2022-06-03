@@ -144,6 +144,45 @@ class BiasedModel:
         return False
 
 
+class SincereBiasedModel:
+    """
+    SincereBiasedModel
+
+    Ends testing the coin if the rewards is expected to be decreased; using prior
+    It flips at least 5 times.
+    """
+
+    def __init__(self, fund):
+        self.fund = fund
+
+    def end_test(self, coin: Coin):
+        return self.fund == 0 or (
+                (
+                        coin.n_flips >= R_if_correct - 1 or
+                        rewards[coin.n_flips][coin.n_heads][1] > get_local_expected_rewards_with_prior(
+                    coin.n_flips,
+                    coin.n_heads
+                )
+                ) and coin.n_flips > 5
+        )
+
+    def test(self, coin: Coin):
+        while not self.end_test(coin):
+            self.fund -= 1
+            coin.flip()
+
+    def reward(self, coin: Coin):
+        label = get_label(coin)
+        if (label == "FAIR" and coin.is_fair) or (label == "CHEAT" and not coin.is_fair):
+            # Correct
+            self.fund += R_if_correct
+            return True
+
+        # Incorrect
+        self.fund += R_if_incorrect
+        return False
+
+
 def simulation(model, prompt=False):
     score = 0
     while model.fund > 0:
@@ -176,7 +215,9 @@ FUND = 100
 simple_model = SimpleModel(FUND)
 elastic_model = ElasticModel(FUND)
 biased_model = BiasedModel(FUND)
+sincere_biased_model = SincereBiasedModel(FUND)
 
 print(f"Simple Model Result: {test_model(simple_model, 10000)}")
 print(f"Elastic Model Result: {test_model(elastic_model, 10000)}")
 print(f"Biased Model Result: {test_model(biased_model, 10000)}")
+print(f"Sincere Biased Model Result: {test_model(sincere_biased_model, 10000)}")
