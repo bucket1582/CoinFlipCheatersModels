@@ -78,26 +78,26 @@ p_{cheat} \ \ \ \ \ \text{o.w.}
 In some cases the elastic model outperforms the biased model. In most cases though, the biased model outperforms the elastic model. The simple model is far behind.
 
 ## Cheat Sheet
-Below is the cheat sheet built by using biased model.
+Below is the cheat sheet built by using biased model. F for Fair, C for Cheat, T for further testing.
 
 | $n$ | $x$ | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ | $13$ | $14$ | $15$ |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :--: | :--: | :--: | :--: | :--: | :--: |
-| $0$ | | Continue |
-| $1$ | | Fair | Continue |
-| $2$ | | Fair | Continue | Cheat |
-| $3$ | | Fair | Fair | Continue | Cheat |
-| $4$ | | Fair | Fair | Fair | Continue | Cheat |
-| $5$ | | Fair | Fair | Fair | Continue | Cheat | Cheat |
-| $6$ | | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat |
-| $7$ | | Fair | Fair | Fair | Fair | Continue | Continue | Cheat | Cheat |
-| $8$ | | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat |
-| $9$ | | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat |
-| $10$ | | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat |
-| $11$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat |
-| $12$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat |
-| $13$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat | Cheat |
-| $14$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat | Cheat | Cheat |
-| $15$ | | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Fair | Continue | Cheat | Cheat | Cheat | Cheat | Cheat | Cheat | Cheat |
+| $0$ | | T |
+| $1$ | | F | T |
+| $2$ | | F | T | C |
+| $3$ | | F | F | T | C |
+| $4$ | | F | F | F | T | C |
+| $5$ | | F | F | F | T | C | C |
+| $6$ | | F | F | F | F | T | C | C |
+| $7$ | | F | F | F | F | T | T | C | C |
+| $8$ | | F | F | F | F | F | T | C | C | C |
+| $9$ | | F | F | F | F | F | F | T | C | C | C |
+| $10$ | | F | F | F | F | F | F | T | C | C | C | C |
+| $11$ | | F | F | F | F | F | F | F | T | C | C | C | C |
+| $12$ | | F | F | F | F | F | F | F | F | T | C | C | C | C |
+| $13$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C |
+| $14$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C | C |
+| $15$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C | C | C |
 
 ## Post Script (... p.s.)
 By the way, the game is well designed. The 'generally' expected rewards are calculated as below.
