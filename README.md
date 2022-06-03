@@ -96,4 +96,6 @@ Some expected rewards are positive. If we do only few tests, the flipping chance
 | :-: | :-: | :-: | :-: | :-: | :-: | :------: | :--: | :--: |
 | $\mathbb{E}[reward(n)]$ | $7.500$ | $0.500$ | $3.100$ | $2.720$ | $3.948$ | $\cdots$ | $-0.638$ | $-1.619$ |
 
-Again, some expected rewards are positive. We can lower $p_{cheat}$ instead of making it higher. Or higher $p_{cheat}$ slightly. These cases are also valid.
+Again, some expected rewards are positive. 
+
+Still, we modify some parameters to make different games. We can lower $p_{cheat}$ instead of making it higher. Or higher $p_{cheat}$ slightly. We may modify the reward if it is not enoughly large to make some expected rewards positive. Modifying $p_{coin}$ can be done either, if it is modified carefully.
