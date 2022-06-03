@@ -9,9 +9,9 @@ P_IS_FAIR = 0.5
 R_if_correct = 15
 R_if_incorrect = -30
 
-CHOOSE = [[0 for _ in range(16)] for _ in range(16)]
-for n in range(1, 16):
-    for k in range(16):
+CHOOSE = [[0 for _ in range(R_if_correct + 1)] for _ in range(R_if_correct + 1)]
+for n in range(1, R_if_correct + 1):
+    for k in range(R_if_correct + 1):
         if k > n:
             CHOOSE[n][k] = 0
             continue

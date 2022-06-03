@@ -156,6 +156,7 @@ def simulation(model, prompt=False):
 
         if prompt:
             print(f"Score: {score}")
+            print(f"Remaining: {model.fund}")
     return score
 
 
