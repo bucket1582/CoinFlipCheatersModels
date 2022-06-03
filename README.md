@@ -90,7 +90,7 @@ The expected rewards are all negative, thus somehow the game would end eventuall
 | :-: | :-: | :-: | :-: | :-: | :-: | :------: | :--: | :--: |
 | $\mathbb{E}[reward(n)]$ | $-18.750$ | $2.750$ | $2.453$ | $1.629$ | $1.552$ | $\cdots$ | $-4.738$ | $-5.327$ |
 
-Some expected rewards are positive. If we do only few tests, the flipping chance is expected to be increased. Therefore, the game would be super long, or even endless, and become boring. Fix $p_{coin} = \dfrac{1}{2}$ and modify $p_{cheat} = \dfrac{9}{10}$. Then we get
+Some expected rewards are positive. If we do only few tests, the flipping chance is expected to be gained. Therefore, the game would be super long, or even endless, and become boring. Fix $p_{coin} = \dfrac{1}{2}$ and modify $p_{cheat} = \dfrac{9}{10}$. Then we get
 
 | $n$ | $0$ | $1$ | $2$ | $3$ | $4$ | $\cdots$ | $14$ | $15$ |
 | :-: | :-: | :-: | :-: | :-: | :-: | :------: | :--: | :--: |
