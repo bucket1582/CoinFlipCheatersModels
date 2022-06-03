@@ -98,4 +98,4 @@ Some expected rewards are positive. If we do only few tests, the flipping chance
 
 Again, some expected rewards are positive. 
 
-Still, we modify some parameters to make different games. We can lower $p_{cheat}$ instead of making it higher. Or higher $p_{cheat}$ slightly. We may modify the reward if it is not enoughly large to make some expected rewards positive. Modifying $p_{coin}$ can be done either, if it is modified carefully.
+Still, we can modify some parameters to make different games. We can lower $p_{cheat}$ instead of making it higher. Or higher $p_{cheat}$ slightly. We may modify the reward if it is not enoughly large to make some expected rewards positive. Modifying $p_{coin}$ can be done either, if it is modified carefully.
