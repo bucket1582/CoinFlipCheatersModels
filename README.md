@@ -96,8 +96,8 @@ Below is the cheat sheet built by using biased model. F for Fair, C for Cheat, T
 | $11$ | | F | F | F | F | F | F | F | T | C | C | C | C |
 | $12$ | | F | F | F | F | F | F | F | F | T | C | C | C | C |
 | $13$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C |
-| $14$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C | C |
-| $15$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C | C | C |
+| $14$ | | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
+| $15$ | | F | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
 
 ## Post Script (... p.s.)
 By the way, the game is well designed. The 'generally' expected rewards are calculated as below.
