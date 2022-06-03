@@ -76,3 +76,24 @@ p_{cheat} \ \ \ \ \ \text{o.w.}
 ![model result](model_test_result.PNG)
 
 In some cases the elastic model outperforms the biased model. In most cases though, the biased model outperforms the elastic model. The simple model is far behind.
+
+## Post Script (... p.s.)
+By the way, the game is well designed. The 'generally' expected rewards are calculated as below.
+
+| $n$ | $0$ | $1$ | $2$ | $3$ | $4$ | $\cdots$ | $14$ | $15$ |
+| :-: | :-: | :-: | :-: | :-: | :-: | :------: | :--: | :--: |
+| $\mathbb{E}[reward(n)]$ | $-7.500$ | $-2.875$ | $-2.469$ | $-2.766$ | $-1.920$ | $\cdots$ | $-6.282$ | $-6.733$ |
+
+The expected rewards are all negative, thus somehow the game would end eventually. If we modify $p_{coin} = \dfrac{1}{4}$, then we get
+
+| $n$ | $0$ | $1$ | $2$ | $3$ | $4$ | $\cdots$ | $14$ | $15$ |
+| :-: | :-: | :-: | :-: | :-: | :-: | :------: | :--: | :--: |
+| $\mathbb{E}[reward(n)]$ | $-18.750$ | $2.750$ | $2.453$ | $1.629$ | $1.552$ | $\cdots$ | $-4.738$ | $-5.327$ |
+
+Some expected rewards are positive, thus if we do only few tests, the flipping chance is expected to be increased. Therefore, the game would be super long, or even endless, and become boring. Fix $p_{coin} = \dfrac{1}{2}$ and modify $p_{cheat} = \dfrac{9}{10}$. Then we get
+
+| $n$ | $0$ | $1$ | $2$ | $3$ | $4$ | $\cdots$ | $14$ | $15$ |
+| :-: | :-: | :-: | :-: | :-: | :-: | :------: | :--: | :--: |
+| $\mathbb{E}[reward(n)]$ | $7.500$ | $0.500$ | $3.100$ | $2.720$ | $3.948$ | $\cdots$ | $-0.638$ | $-1.619$ |
+
+Again, some expected rewards are positive. We can lower $p_{cheat}$ instead of making it higher. Or higher $p_{cheat}$ slightly. These cases are also valid.
