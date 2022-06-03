@@ -72,10 +72,13 @@ p_{fair} \ \ \ \ \ \text{if } fairness > 0.5 \text{ for } n, x \\
 p_{cheat} \ \ \ \ \ \text{o.w.}
 \end{cases} $$
 
+## Sincere Biased Model
+Same as biased model, but it flips at least 5 times. The number 5 was set emprically.
+
 ## Model Result (After 10000 simulations)
 ![model result](model_test_result.PNG)
 
-In some cases the elastic model outperforms the biased model. In most cases though, the biased model outperforms the elastic model. The simple model is far behind.
+In some cases the elastic model outperforms the biased model. In most cases though, the biased model outperforms the elastic model. The simple model is far behind. The sincere biased model is better than the biased model in average, however for the best cases, biased model outperforms the sincere biased model.
 
 ## Cheat Sheet
 Below is the cheat sheet built by using biased model. F for Fair, C for Cheat, T for further testing.
