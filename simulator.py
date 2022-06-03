@@ -159,12 +159,14 @@ def simulation(model, prompt=False):
     return score
 
 
-def test_model(model, num_test=100):
+def test_model(model, num_test=100, prompt_records=False):
     global FUND
     records = []
     for _ in range(num_test):
         records.append(simulation(model))
         model.fund = FUND
+    if prompt_records:
+        print(records)
     return f"Min: {min(records)}, Mean: {sum(records) / len(records)}, Max: {max(records)}"
 
 
