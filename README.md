@@ -33,8 +33,8 @@ $$
 
 From above, we can calculate the expected reward. If there is a way that maximizes the expected reward, we can take that as a strategy.
 
-## Simple Model
-The simple model tests a coin until the 'generally' expected reward is at its maximum. What I meant by the term generally is that it does not consider **how many times we got heads**.
+## No Belief Model
+The no belief model tests a coin until the 'generally' expected reward is at its maximum. What I meant by the term generally is that it does not consider **how many times we got heads**.
 
 $$ \mathbb{E}[reward(n)] = \Sigma_{x = 0}^{n} P(X = x) reward(n, x) $$
 
@@ -47,15 +47,15 @@ P(X = x) &= P(X = x \cap \text{The coin is fair}) + P(X = x \cap \text{The coin 
 &= p_{coin}b(x; n, p_{fair}) + (1 - p_{coin})b(x; n, p_{cheat}) 
 \end{align*} $$
 
-## Elastic Model
-The elastic model tests a coin while the expected reward increases. Which means that we compare below two values.
+## Weak Belief Model
+The weak belief model tests a coin while the expected reward increases. Which means that we compare below two values.
 
 1. $$ \mathbb{E}[reward(n, x)] $$
 2. $$ P(\text{The next coin is head}) \times reward(n + 1, x + 1) + P(\text{The next coin is tail}) \times reward(n + 1, x) $$
 
 If the first value is greater than the second value, the reward expected to be decreased, thus we label the coin instantly. Otherwise, the reward expected to be increased, thus we flip once more.
 
-To calculate the second value, we use the law of total probability.
+To calculate the second value, we use the law of total probability, and use $p_{coin}$ for estimating the probability of the coin to be fair; it does not use any posterior observation data.
 
 $$ \begin{align*} 
 P(\text{The next coin is head}) &= P(\text{The coin is fair} \cap \text{The next coin is head}) + P(\text{The coin is unfair} \cap \text{The next coin is tail}) \\
@@ -64,19 +64,21 @@ P(\text{The next coin is head}) &= P(\text{The coin is fair} \cap \text{The next
 
 We can calculate $P(\text{The next coin is tail})$ as $1 - P(\text{The next coin is head})$.
 
-## Biased Model
-The biased model is similar to the elastic model, except that it considers the 'current' label. As mentioned above, the coin can be labeled by using $fairness$. Because we have the number of flips and the number of heads, we can pre-label the coin as fair or cheat. We can use the pre-label to calculate the expected reward, instead of using the law of total probability. In formula,
+## Fanatic Model
+The fanatic model is similar to the elastic model, except that it considers the 'current' label. As mentioned above, the coin can be labeled by using $fairness$. Because we have the number of flips and the number of heads, we can pre-label the coin as fair or cheat. We can use the pre-label to calculate the expected reward, instead of using the law of total probability. In formula,
 
 $$ P(\text{The next coin is head}) = \begin{cases}
 p_{fair} \ \ \ \ \ \text{if } fairness > 0.5 \text{ for } n, x \\
 p_{cheat} \ \ \ \ \ \text{o.w.}
 \end{cases} $$
 
-## Sincere Biased Model
-Same as biased model, but it flips at least 5 times. The number 5 was set emprically.
+This model strongly depends on the posterior observation data, not considering the prior probability.
 
-## Dealyed Biased Model
-Same as biased model, but it keep testing if the expected reward decreased for only once.
+## Sincere Fanatic Model
+Same as fanatic model, but it flips at least 5 times. The number 5 was set emprically.
+
+## Calm Fanatic Model
+Same as fanatic model, but it keep testing if the expected reward decreased for only once.
 
 ## Model Result (After 10000 simulations)
 ![model result](model_test_result.PNG)
