@@ -183,6 +183,51 @@ class SincereBiasedModel:
         return False
 
 
+class DelayedBiasedModel:
+    """
+    DelayedBiasedModel
+
+    Ends testing the coin if the rewards is expected to be decreased; using prior
+    But for once, it pass the case
+    """
+
+    def __init__(self, fund):
+        self.fund = fund
+        self.test_phase = 0
+
+    def end_test(self, coin: Coin):
+        if self.fund == 0 or coin.n_flips >= R_if_correct - 1 or \
+                (
+                        rewards[coin.n_flips][coin.n_heads][1] > get_local_expected_rewards_with_prior(
+                    coin.n_flips, coin.n_heads
+                ) and self.test_phase == 1
+                ):
+            self.test_phase = 0
+            return True
+
+        if rewards[coin.n_flips][coin.n_heads][1] > get_local_expected_rewards_with_prior(coin.n_flips,
+                                                                                          coin.n_heads):
+            self.test_phase = 1
+            return False
+        return False
+
+    def test(self, coin: Coin):
+        while not self.end_test(coin):
+            self.fund -= 1
+            coin.flip()
+
+    def reward(self, coin: Coin):
+        label = get_label(coin)
+        if (label == "FAIR" and coin.is_fair) or (label == "CHEAT" and not coin.is_fair):
+            # Correct
+            self.fund += R_if_correct
+            return True
+
+        # Incorrect
+        self.fund += R_if_incorrect
+        return False
+
+
 def simulation(model, prompt=False):
     score = 0
     while model.fund > 0:
@@ -216,8 +261,10 @@ simple_model = SimpleModel(FUND)
 elastic_model = ElasticModel(FUND)
 biased_model = BiasedModel(FUND)
 sincere_biased_model = SincereBiasedModel(FUND)
+delayed_biased_model = DelayedBiasedModel(FUND)
 
 print(f"Simple Model Result: {test_model(simple_model, 10000)}")
 print(f"Elastic Model Result: {test_model(elastic_model, 10000)}")
 print(f"Biased Model Result: {test_model(biased_model, 10000)}")
 print(f"Sincere Biased Model Result: {test_model(sincere_biased_model, 10000)}")
+print(f"Delayed Biased Model Result: {test_model(delayed_biased_model, 10000)}")
