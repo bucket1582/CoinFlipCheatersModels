@@ -64,8 +64,11 @@ P(\text{The next coin is head}) &= P(\text{The coin is fair} \cap \text{The next
 
 We can calculate $P(\text{The next coin is tail})$ as $1 - P(\text{The next coin is head})$.
 
+## Calm Weak Belief Model
+Same as weak belief model, but it keep testing if the expected reward decreased for only once.
+
 ## Fanatic Model
-The fanatic model is similar to the elastic model, except that it considers the 'current' label. As mentioned above, the coin can be labeled by using $fairness$. Because we have the number of flips and the number of heads, we can pre-label the coin as fair or cheat. We can use the pre-label to calculate the expected reward, instead of using the law of total probability. In formula,
+The fanatic model is similar to the weak belief model, except that it considers the 'current' label. As mentioned above, the coin can be labeled by using $fairness$. Because we have the number of flips and the number of heads, we can pre-label the coin as fair or cheat. We can use the pre-label to calculate the expected reward, instead of using the law of total probability. In formula,
 
 $$ P(\text{The next coin is head}) = \begin{cases}
 p_{fair} \ \ \ \ \ \text{if } fairness > 0.5 \text{ for } n, x \\
@@ -80,11 +83,22 @@ Same as fanatic model, but it flips at least 5 times. The number 5 was set empri
 ## Calm Fanatic Model
 Same as fanatic model, but it keep testing if the expected reward decreased for only once.
 
+## Belief Model
+The belief model is also simliar to the weak belief model, except that it considers $fairness$. The weak belief model estimates the probability of coin being fair to be $p_{coin}$. Instead, we may use $fairness$ since it also uses posterior observation data, expected to give better results. In formula,
+
+$$ \begin{align*} 
+P(\text{The next coin is head}) &= P(\text{The coin is fair} \cap \text{The next coin is head}) + P(\text{The coin is unfair} \cap \text{The next coin is tail}) \\
+&= fairness \times p_{fair} + (1 - fairness) \times p_{cheat}
+\end{align*} $$
+
+## Calm Belief Model
+Same as belief model, but it keep testing if the expected reward decreased for only once.
+
 ## Model Result (After 10000 simulations)
 ![model result](model_test_result.PNG)
 
 ## Cheat Sheet
-Below is the cheat sheet built by using biased model. F for Fair, C for Cheat, T for further testing.
+Below is the cheat sheet built by using fanatic model. F for Fair, C for Cheat, T for further testing.
 
 | $n$ | $x$ | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ | $13$ | $14$ | $15$ |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :--: | :--: | :--: | :--: | :--: | :--: |
