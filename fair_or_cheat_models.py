@@ -55,10 +55,10 @@ class AbstractModel:
         CHEAT if the model would conclude the coin as biased
         TEST if the model would keep testing
         """
-        if self.end_condition(n_flips, n_heads):
+        if n_flips >= R_if_correct - 1:
             return labels[n_flips][n_heads]
 
-        if n_flips >= R_if_correct - 1:
+        if self.end_condition(n_flips, n_heads):
             return labels[n_flips][n_heads]
 
         return "TEST"
@@ -257,7 +257,7 @@ class BeliefModel(AbstractModel):
                (1 - next_head_prob) * expected_rewards[n_flips + 1][n_heads]
 
     def end_condition(self, n_flips: int, n_heads: int) -> bool:
-        return expected_rewards[n_flips][n_heads] > WeakBeliefModel.expect_next_reward(n_flips, n_heads)
+        return expected_rewards[n_flips][n_heads] > BeliefModel.expect_next_reward(n_flips, n_heads)
 
 
 class CalmBeliefModel(FanaticModel):
