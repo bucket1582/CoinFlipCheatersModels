@@ -75,6 +75,9 @@ p_{cheat} \ \ \ \ \ \text{o.w.}
 ## Sincere Biased Model
 Same as biased model, but it flips at least 5 times. The number 5 was set emprically.
 
+## Dealyed Biased Model
+Same as biased model, but it keep testing if the expected reward decreased for only once.
+
 ## Model Result (After 10000 simulations)
 ![model result](model_test_result.PNG)
 
