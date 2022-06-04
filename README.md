@@ -119,7 +119,7 @@ Below is the cheat sheet built using fanatic model. F for Fair, C for Cheat, T f
 | $14$ | | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
 | $15$ | | F | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
 
-## Post Script (... p.s.)
+## Note on the game balance
 By the way, the game is well designed. The 'generally' expected rewards are calculated as below.
 
 | $n$ | $0$ | $1$ | $2$ | $3$ | $4$ | $\cdots$ | $14$ | $15$ |
