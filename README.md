@@ -98,7 +98,7 @@ Same as belief model, but it keep testing if the expected reward decreased for o
 ![model result](model_test_result.PNG)
 
 ## Cheat Sheet
-Below is the cheat sheet built by using fanatic model. F for Fair, C for Cheat, T for further testing.
+Below is the cheat sheet built using fanatic model. F for Fair, C for Cheat, T for further testing.
 
 | $n$ | $x$ | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ | $13$ | $14$ | $15$ |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :--: | :--: | :--: | :--: | :--: | :--: |
