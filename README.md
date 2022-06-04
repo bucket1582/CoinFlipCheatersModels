@@ -1,5 +1,5 @@
 # CoinFlipCheatersModels
-These are some models I made for the [coin flip cheaters](https://primerlearning.org/)
+These are some models I made for the [coin flip cheaters](https://www.youtube.com/watch?v=QC91Bf8hQVo)
 
 ## Analysis
 There are two types of coins in the problem.
