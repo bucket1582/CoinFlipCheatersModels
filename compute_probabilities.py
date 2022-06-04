@@ -23,12 +23,27 @@ for n in range(1, R_if_correct + 1):
         CHOOSE[n][k] = CHOOSE[n - 1][k - 1] + CHOOSE[n - 1][k]
 
 
-def binomial(x, n, p):
+def binomial(x: int, n: int, p: float) -> float:
+    """
+    Probability mass function for the binomial distribution
+
+    :param x: Number of successes
+    :param n: Number of trials
+    :param p: Success probability
+    :return: probability
+    """
     global CHOOSE
     return CHOOSE[n][x] * pow(p, x) * pow(1 - p, n - x)
 
 
-def compute_fairness(n_flips, n_heads):
+def compute_fairness(n_flips: int, n_heads: int) -> float:
+    """
+    Compute fairness; the probability of the coin to be fair.
+
+    :param n_flips: Number of flips
+    :param n_heads: Number of heads observed
+    :return: fairness
+    """
     # The probability of the coin to be fair; using bayes' theorem
     global P_FAIR, P_CHEAT, P_IS_FAIR
     p_if_fair = binomial(n_heads, n_flips, P_FAIR)  # P(X = x|The coin is fair); X = # of heads
@@ -36,16 +51,31 @@ def compute_fairness(n_flips, n_heads):
     p_fairness = p_if_fair * P_IS_FAIR
     p_cheatness = p_if_cheat * (1 - P_IS_FAIR)
 
-    return  p_fairness / (p_cheatness + p_fairness)
+    return p_fairness / (p_cheatness + p_fairness)
 
 
-def compute_heads(n_flips, n_heads):
-    # Compute the probability of heads; using total probability law
+def compute_heads_probability(n_flips: int, n_heads: int) -> float:
+    """
+    Compute the probability of heads; using total probability law
+
+    :param n_flips: Number of flips
+    :param n_heads: Number of heads observed
+    :return: probability of getting head
+    """
     global P_FAIR, P_CHEAT, P_IS_FAIR
     return P_IS_FAIR * binomial(n_heads, n_flips, P_FAIR) + (1 - P_IS_FAIR) * binomial(n_heads, n_flips, P_CHEAT)
 
 
-def expected_reward(n_flips, n_heads):
+def get_label_and_expected_reward(n_flips: int, n_heads: int) -> tuple[str, float]:
+    """
+    Return label and expected reward
+
+    :param n_flips: Number of flips
+    :param n_heads: Number of heads observed
+    :return: two elements
+    first element is FAIR if the coin is expected to be fair, otherwise CHEAT
+    second element is the expected reward
+    """
     fairness = compute_fairness(n_flips, n_heads)
     if fairness >= 0.5:
         # Consider the coin is fair
@@ -56,43 +86,19 @@ def expected_reward(n_flips, n_heads):
     return "CHEAT", R_if_incorrect * fairness + R_if_correct * (1 - fairness) - n_flips
 
 
-rewards = [[("", 0.0) for _ in range(R_if_correct + 1)] for _ in range(R_if_correct + 1)]
-rewards[0][0] = ("FAIR", P_IS_FAIR * R_if_correct + (1 - P_IS_FAIR) * R_if_incorrect)
+expected_rewards = [[0.0 for _ in range(R_if_correct + 1)] for _ in range(R_if_correct + 1)]
+labels = [["FAIR" for _ in range(R_if_correct + 1)] for _ in range(R_if_correct + 1)]
+expected_rewards[0][0] = P_IS_FAIR * R_if_correct + (1 - P_IS_FAIR) * R_if_incorrect
+labels[0][0] = "FAIR"
 for num_flips in range(1, R_if_correct + 1):
     for num_heads in range(num_flips + 1):
-        rewards[num_flips][num_heads] = expected_reward(num_flips, num_heads)
+        labels[num_flips][num_heads], expected_rewards[num_flips][num_heads] = get_label_and_expected_reward(num_flips,
+                                                                                                             num_heads)
 
-expected_rewards = [0.0 for _ in range(R_if_correct + 1)]
-expected_rewards[0] = P_IS_FAIR * R_if_correct + (1 - P_IS_FAIR) * R_if_incorrect
+g_expected_rewards = [0.0 for _ in range(R_if_correct + 1)]
+g_expected_rewards[0] = P_IS_FAIR * R_if_correct + (1 - P_IS_FAIR) * R_if_incorrect
 for num_flips in range(1, R_if_correct + 1):
     mean_reward = 0
     for num_heads in range(num_flips + 1):
-        mean_reward += rewards[num_flips][num_heads][1] * compute_heads(num_flips, num_heads)
-    expected_rewards[num_flips] = mean_reward
-
-
-def get_reward(n_flips, n_heads):
-    global rewards
-    return rewards[n_flips][n_heads]
-
-
-def get_general_expected_rewards(n_flips):
-    global expected_rewards
-    return expected_rewards[n_flips]
-
-
-def get_local_expected_rewards(n_flips, n_heads):
-    # If I get n_heads out of n_flips, should I test once more?
-    # What is the expected reward after one more test?
-    global rewards, P_IS_FAIR, P_FAIR, P_CHEAT
-    next_head_prob = P_IS_FAIR * P_FAIR + (1 - P_IS_FAIR) * P_CHEAT
-    return next_head_prob * rewards[n_flips + 1][n_heads + 1][1] + (1 - next_head_prob) * rewards[n_flips + 1][n_heads][1]
-
-
-def get_local_expected_rewards_with_prior(n_flips, n_heads):
-    # Compute expected reward using current decision
-    global rewards, P_IS_FAIR, P_FAIR, P_CHEAT
-    if rewards[n_flips][n_heads][0] == "FAIR":
-        return P_FAIR * rewards[n_flips + 1][n_heads + 1][1] + (1 - P_FAIR) * rewards[n_flips + 1][n_heads][1]
-
-    return P_CHEAT * rewards[n_flips + 1][n_heads + 1][1] + (1 - P_CHEAT) * rewards[n_flips + 1][n_heads][1]
+        mean_reward += expected_rewards[num_flips][num_heads] * compute_heads_probability(num_flips, num_heads)
+    g_expected_rewards[num_flips] = mean_reward
