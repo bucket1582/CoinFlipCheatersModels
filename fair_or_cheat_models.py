@@ -127,11 +127,11 @@ class WeakBeliefModel(AbstractModel):
     @classmethod
     def expect_next_reward(cls, n_flips: int, n_heads: int) -> float:
         next_head_prob = P_IS_FAIR * P_FAIR + (1 - P_IS_FAIR) * P_CHEAT
-        return next_head_prob * expected_rewards[n_flips + 1][n_heads + 1][1] + \
-               (1 - next_head_prob) * expected_rewards[n_flips + 1][n_heads][1]
+        return next_head_prob * expected_rewards[n_flips + 1][n_heads + 1] + \
+               (1 - next_head_prob) * expected_rewards[n_flips + 1][n_heads]
 
     def end_condition(self, n_flips: int, n_heads: int) -> bool:
-        return expected_rewards[n_flips][n_heads][1] > WeakBeliefModel.expect_next_reward(n_flips, n_heads)
+        return expected_rewards[n_flips][n_heads] > WeakBeliefModel.expect_next_reward(n_flips, n_heads)
 
 
 class FanaticModel(AbstractModel):
@@ -147,11 +147,11 @@ class FanaticModel(AbstractModel):
     @classmethod
     def expect_next_reward(cls, n_flips: int, n_heads: int) -> float:
         if labels[n_flips][n_heads] == "FAIR":
-            return P_FAIR * expected_rewards[n_flips + 1][n_heads + 1][1] + \
-                   (1 - P_FAIR) * expected_rewards[n_flips + 1][n_heads][1]
+            return P_FAIR * expected_rewards[n_flips + 1][n_heads + 1] + \
+                   (1 - P_FAIR) * expected_rewards[n_flips + 1][n_heads]
 
-        return P_CHEAT * expected_rewards[n_flips + 1][n_heads + 1][1] + \
-               (1 - P_CHEAT) * expected_rewards[n_flips + 1][n_heads][1]
+        return P_CHEAT * expected_rewards[n_flips + 1][n_heads + 1] + \
+               (1 - P_CHEAT) * expected_rewards[n_flips + 1][n_heads]
 
     def end_condition(self, n_flips: int, n_heads: int) -> bool:
         return expected_rewards[n_flips][n_heads] > FanaticModel.expect_next_reward(n_flips, n_heads)
