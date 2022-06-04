@@ -83,8 +83,6 @@ Same as fanatic model, but it keep testing if the expected reward decreased for 
 ## Model Result (After 10000 simulations)
 ![model result](model_test_result.PNG)
 
-In some cases the elastic model outperforms the biased model. In most cases though, the biased model outperforms the elastic model. The simple model is far behind. The sincere biased model is better than the biased model in average. The delayed biased model outperforms above all.
-
 ## Cheat Sheet
 Below is the cheat sheet built by using biased model. F for Fair, C for Cheat, T for further testing.
 
