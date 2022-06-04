@@ -134,6 +134,42 @@ class WeakBeliefModel(AbstractModel):
         return expected_rewards[n_flips][n_heads] > WeakBeliefModel.expect_next_reward(n_flips, n_heads)
 
 
+class CalmWeakBeliefModel(AbstractModel):
+    """
+    CalmWeakBeliefModel
+
+    Ends testing the coin if the reward is expected to be decreased; but if its for the first time, it keep testing.
+    For computing next head probability, this model uses p_is_fair to compute the probability of the coin to be fair.
+    Means that this model uses prior data only; there is no update.
+    """
+
+    def __init__(self, fund):
+        super().__init__(fund)
+        self.test_phase = 0
+
+    @classmethod
+    def expect_next_reward(cls, n_flips: int, n_heads: int) -> float:
+        next_head_prob = P_IS_FAIR * P_FAIR + (1 - P_IS_FAIR) * P_CHEAT
+        return next_head_prob * expected_rewards[n_flips + 1][n_heads + 1] + \
+               (1 - next_head_prob) * expected_rewards[n_flips + 1][n_heads]
+
+    def end_condition(self, n_flips: int, n_heads: int) -> bool:
+        if expected_rewards[n_flips][n_heads] > WeakBeliefModel.expect_next_reward(n_flips, n_heads) and \
+                self.test_phase == 0:
+            self.test_phase = 1
+            return False
+
+        if expected_rewards[n_flips][n_heads] > WeakBeliefModel.expect_next_reward(n_flips, n_heads):
+            return True
+
+    def is_end_condition(self, coin: Coin) -> bool:
+        if self.fund <= 0 or coin.n_flips >= R_if_correct - 1 or self.end_condition(coin.n_flips, coin.n_heads):
+            self.test_phase = 0
+            return True
+
+        return False
+
+
 class FanaticModel(AbstractModel):
     """
     FanaticModel
@@ -194,6 +230,56 @@ class CalmFanaticModel(FanaticModel):
             return False
 
         if expected_rewards[n_flips][n_heads] > FanaticModel.expect_next_reward(n_flips, n_heads):
+            return True
+
+    def is_end_condition(self, coin: Coin) -> bool:
+        if self.fund <= 0 or coin.n_flips >= R_if_correct - 1 or self.end_condition(coin.n_flips, coin.n_heads):
+            self.test_phase = 0
+            return True
+
+        return False
+
+
+class BeliefModel(AbstractModel):
+    """
+    BeliefModel
+
+    Ends testing the coin if the reward is expected to be decreased.
+    For computing next head probability, this model uses fairness to compute the probability of the coin to be fair.
+    Means that this model uses both prior and posterior data.
+    """
+
+    @classmethod
+    def expect_next_reward(cls, n_flips: int, n_heads: int) -> float:
+        fairness = compute_fairness(n_flips, n_heads)
+        next_head_prob = fairness * P_FAIR + (1 - fairness) * P_CHEAT
+        return next_head_prob * expected_rewards[n_flips + 1][n_heads + 1] + \
+               (1 - next_head_prob) * expected_rewards[n_flips + 1][n_heads]
+
+    def end_condition(self, n_flips: int, n_heads: int) -> bool:
+        return expected_rewards[n_flips][n_heads] > WeakBeliefModel.expect_next_reward(n_flips, n_heads)
+
+
+class CalmBeliefModel(FanaticModel):
+    """
+    CalmBeliefModel
+
+    Ends testing the coin if the reward is expected to be decreased; but if its for the first time, it keep testing.
+    For computing next head probability, this model uses fairness to compute the probability of the coin to be fair.
+    Means that this model uses both prior and posterior data.
+    """
+
+    def __init__(self, fund):
+        super().__init__(fund)
+        self.test_phase = 0
+
+    def end_condition(self, n_flips: int, n_heads: int) -> bool:
+        if expected_rewards[n_flips][n_heads] > BeliefModel.expect_next_reward(n_flips, n_heads) and \
+                self.test_phase == 0:
+            self.test_phase = 1
+            return False
+
+        if expected_rewards[n_flips][n_heads] > BeliefModel.expect_next_reward(n_flips, n_heads):
             return True
 
     def is_end_condition(self, coin: Coin) -> bool:

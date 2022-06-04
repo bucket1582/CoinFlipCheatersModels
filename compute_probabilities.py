@@ -46,6 +46,9 @@ def compute_fairness(n_flips: int, n_heads: int) -> float:
     """
     # The probability of the coin to be fair; using bayes' theorem
     global P_FAIR, P_CHEAT, P_IS_FAIR
+    if n_flips == 0:
+        return P_IS_FAIR
+
     p_if_fair = binomial(n_heads, n_flips, P_FAIR)  # P(X = x|The coin is fair); X = # of heads
     p_if_cheat = binomial(n_heads, n_flips, P_CHEAT)  # P(X = x|The coin is not fair)
     p_fairness = p_if_fair * P_IS_FAIR
