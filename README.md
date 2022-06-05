@@ -4,7 +4,7 @@ These are some models I made for the [coin flip cheaters](https://www.youtube.co
 ## Analysis
 There are two types of coins in the problem.
 1. fair coin (probability of heads is 1/2)
-2. unfair coin (probability of heads is 3/4)
+2. biased coin (probability of heads is 3/4)
 
 Using Bayes' theorem, one can find the probability of the coin to be fair. 
 
@@ -12,7 +12,7 @@ Let $n$ be the number of coin flips, $X$ be the number of heads, $p_{fair} = \df
 
 $$ fairness := P(\text{The coin is fair}|X = x) = \dfrac{b(x; n, p_{fair})p_{coin}}{b(x; n, p_{fair})p_{coin} + b(x; n, p_{cheat})(1 - p_{coin})} $$
 
-where $b(x; n, p)$ is the probability mass function of the binomial distribution. Since $ P(\text{The coin is unfair}|X = x) = 1 - fairness$, if $fairness > \dfrac{1}{2}$, we can conclude that the coin is more likely to be fair. Otherwise, we may conclude that the coin is more likely to be unfair.
+where $b(x; n, p)$ is the probability mass function of the binomial distribution. Since $ P(\text{The coin is unfair}|X = x) = 1 - fairness$, if $fairness > \dfrac{1}{2}$, we can conclude that the coin is more likely to be fair. Otherwise, we may conclude that the coin is more likely to be biased.
 
 If we label right, we get 1 point and 15 flipping chances. Otherwise we lose 30 flipping chances. Let's consider only the flipping chances. If we flip once, we lose 1 flipping chance. We may gain or lose flipping chances by labeling. Thus, we can evaluate the labeling process by below formula.
 
@@ -86,10 +86,24 @@ P(\text{The next coin is head}) &= P(\text{The coin is fair} \cap \text{The next
 ## Calm Models
 There is huge uncertainty whether the coin is fair or biased, if the model met the end condition for the first time. Therefore calm models do not end testing if the end condition (the reward is expected to be decreased) is first met. When the end condition is again met, they end testing. If the remaining fund is 0 or it is 14th flip, it ends testing, since there is no more chances to flip.
 
+## Indecisive Models
+If there is huge uncertainty, it would be better to minimize the uncertainty. Thus, indecisive models uses significance level to label the coin. If fairness of coin is enoughly small or large that the model is certain that it is fair or biased, it label the coin.
+
+### Basic Indecisive Model
+As mentioned above, indecisive model uses significance level to check the end condition. If
+
+$$ fairness < significance_level \lor fairness > 1 - significance_level $$
+
+The model thinks that the coin is *certainly* fair or biased. Empirically significant level of 0.3 worked fine.
+
+### Indecisive Other Models
+For computing expected next reward, other than considering only for the next step, indecisive models consider every combinations that can occur. When considering every combinations, it computes expected reward if given fairness(n + k, x + l) (k for future flips, l for future heads) is signficant, and search further if given fairness is not significant.
+
 ## Model Result (After 10000 simulations)
 ![model result](model_test_result.PNG)
 
 ## Cheat Sheet
+### Fanatic Model
 Below is the cheat sheet built using fanatic model. F for Fair, C for Cheat, T for further testing.
 
 | $n$ | $x$ | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ | $13$ | $14$ | $15$ |
@@ -107,6 +121,28 @@ Below is the cheat sheet built using fanatic model. F for Fair, C for Cheat, T f
 | $10$ | | F | F | F | F | F | F | T | C | C | C | C |
 | $11$ | | F | F | F | F | F | F | F | T | C | C | C | C |
 | $12$ | | F | F | F | F | F | F | F | F | T | C | C | C | C |
+| $13$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C |
+| $14$ | | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
+| $15$ | | F | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
+
+### Basic Indecisive Model
+Below is the cheat sheet built using basic indecisive model. F for Fair, C for Cheat, T for further testing.
+
+| $n$ | $x$ | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ | $13$ | $14$ | $15$ |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :--: | :--: | :--: | :--: | :--: | :--: |
+| $0$ | | T |
+| $1$ | | T | T |
+| $2$ | | F | T | T |
+| $3$ | | F | F | T | C |
+| $4$ | | F | F | T | T | C |
+| $5$ | | F | F | F | T | C | C |
+| $6$ | | F | F | F | F | T | C | C |
+| $7$ | | F | F | F | F | T | T | C | C |
+| $8$ | | F | F | F | F | F | T | C | C | C |
+| $9$ | | F | F | F | F | F | T | T | C | C | C |
+| $10$ | | F | F | F | F | F | F | T | T | C | C | C |
+| $11$ | | F | F | F | F | F | F | F | T | C | C | C | C |
+| $12$ | | F | F | F | F | F | F | F | T | T | C | C | C | C |
 | $13$ | | F | F | F | F | F | F | F | F | T | C | C | C | C | C |
 | $14$ | | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
 | $15$ | | F | F | F | F | F | F | F | F | F | F | C | C | C | C | C | C |
