@@ -3,16 +3,11 @@ from basic_models import AbstractModel, WeakBeliefModel, FanaticModel, BeliefMod
 from coin import Coin
 
 
-def get_label(n_flips: int, n_heads: int) -> float:
-    return labels[n_flips][n_heads]
-
-
-# noinspection PyMethodMayBeStatic
 class AbstractCalmModel(AbstractModel):
     """
     An abstract model for calm models
 
-    calm models do not label coins if the end condition of testing was first met.
+    Calm models do not label coins if the end condition of testing was first met.
     """
 
     def __init__(self, fund: int):
@@ -37,7 +32,7 @@ class AbstractCalmModel(AbstractModel):
         return False
 
 
-class CalmWeakBeliefModel(AbstractCalmModel):
+class CalmWeakBeliefModel(WeakBeliefModel, AbstractCalmModel):
     """
     CalmWeakBeliefModel
 
@@ -46,11 +41,8 @@ class CalmWeakBeliefModel(AbstractCalmModel):
     Means that this model uses prior data only; there is no update.
     """
 
-    def end_condition(self, n_flips: int, n_heads: int) -> bool:
-        return expected_rewards[n_flips][n_heads] > WeakBeliefModel.expect_next_reward(n_flips, n_heads)
 
-
-class CalmFanaticModel(AbstractCalmModel):
+class CalmFanaticModel(FanaticModel, AbstractCalmModel):
     """
     CalmFanaticModel
 
@@ -60,11 +52,8 @@ class CalmFanaticModel(AbstractCalmModel):
     Means that this model believes *fanatically* the observed data; the model does not use prior data.
     """
 
-    def end_condition(self, n_flips: int, n_heads: int) -> bool:
-        return expected_rewards[n_flips][n_heads] > FanaticModel.expect_next_reward(n_flips, n_heads)
 
-
-class CalmBeliefModel(AbstractCalmModel):
+class CalmBeliefModel(BeliefModel, AbstractCalmModel):
     """
     CalmBeliefModel
 
@@ -72,6 +61,3 @@ class CalmBeliefModel(AbstractCalmModel):
     For computing next head probability, this model uses fairness to compute the probability of the coin to be fair.
     Means that this model uses both prior and posterior data.
     """
-
-    def end_condition(self, n_flips: int, n_heads: int) -> bool:
-        return expected_rewards[n_flips][n_heads] > BeliefModel.expect_next_reward(n_flips, n_heads)

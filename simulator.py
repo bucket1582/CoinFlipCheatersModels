@@ -1,6 +1,7 @@
 from coin import Coin
 from basic_models import *
 from calm_models import *
+from indecisive_models import *
 
 
 def simulation(model, prompt=False):
@@ -54,3 +55,15 @@ print(f"Calm models ###########################")
 print(f"Calm weak belief model Result: {test_model(calm_belief_model, 10000)}")
 print(f"Calm fanatic model Result: {test_model(calm_fanatic_model, 10000)}")
 print(f"Calm belief model Result: {test_model(calm_belief_model, 10000)}")
+
+# Indecisive Models
+basic_indecisive_model = BasicIndecisiveModel(FUND, significance_level=0.3)
+indecisive_weak_belief_model = IndecisiveWeakBeliefModel(FUND, significance_level=0.3)
+indecisive_fanatic_model = IndecisiveFanaticModel(FUND, significance_level=0.3)
+indecisive_belief_model = IndecisiveBeliefModel(FUND, significance_level=0.3)
+
+print(f"Indecisive models #####################")
+print(f"Basic indecisive model Result: {test_model(basic_indecisive_model, 10000)}")
+print(f"Indecisive weak belief model Result: {test_model(indecisive_weak_belief_model, 10000)}")
+print(f"Indecisive fanatic model Result: {test_model(indecisive_fanatic_model, 10000)}")
+print(f"Indecisive belief model Result: {test_model(indecisive_belief_model, 10000)}")

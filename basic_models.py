@@ -7,7 +7,6 @@ def get_label(n_flips: int, n_heads: int) -> float:
     return labels[n_flips][n_heads]
 
 
-# noinspection PyMethodMayBeStatic
 class AbstractModel:
     """
     An abstract model for all models
