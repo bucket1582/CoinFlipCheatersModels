@@ -57,16 +57,17 @@ def compute_fairness(n_flips: int, n_heads: int) -> float:
     return p_fairness / (p_cheatness + p_fairness)
 
 
-def compute_heads_probability(n_flips: int, n_heads: int) -> float:
+def compute_heads_probability(n_flips: int, n_heads: int, probability: float = P_IS_FAIR) -> float:
     """
     Compute the probability of heads; using total probability law
 
     :param n_flips: Number of flips
     :param n_heads: Number of heads observed
+    :param probability: Probability of coin being fair
     :return: probability of getting head
     """
-    global P_FAIR, P_CHEAT, P_IS_FAIR
-    return P_IS_FAIR * binomial(n_heads, n_flips, P_FAIR) + (1 - P_IS_FAIR) * binomial(n_heads, n_flips, P_CHEAT)
+    global P_FAIR, P_CHEAT
+    return probability * binomial(n_heads, n_flips, P_FAIR) + (1 - probability) * binomial(n_heads, n_flips, P_CHEAT)
 
 
 def get_label_and_expected_reward(n_flips: int, n_heads: int) -> tuple[str, float]:
