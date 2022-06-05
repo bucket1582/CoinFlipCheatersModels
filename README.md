@@ -33,7 +33,8 @@ $$
 
 From above, we can calculate the expected reward. If there is a way that maximizes the expected reward, we can take that as a strategy.
 
-## No Belief Model
+## Basic Models
+### No Belief Model
 The no belief model tests a coin until the 'generally' expected reward is at its maximum. What I meant by the term generally is that it does not consider **how many times we got heads**.
 
 $$ \mathbb{E}[reward(n)] = \Sigma_{x = 0}^{n} P(X = x) reward(n, x) $$
@@ -47,7 +48,7 @@ P(X = x) &= P(X = x \cap \text{The coin is fair}) + P(X = x \cap \text{The coin 
 &= p_{coin}b(x; n, p_{fair}) + (1 - p_{coin})b(x; n, p_{cheat}) 
 \end{align*} $$
 
-## Weak Belief Model
+### Weak Belief Model
 The weak belief model tests a coin while the expected reward increases. Which means that we compare below two values.
 
 1. $$ \mathbb{E}[reward(n, x)] $$
@@ -64,10 +65,7 @@ P(\text{The next coin is head}) &= P(\text{The coin is fair} \cap \text{The next
 
 We can calculate $P(\text{The next coin is tail})$ as $1 - P(\text{The next coin is head})$.
 
-## Calm Weak Belief Model
-Same as weak belief model, but it keep testing if the expected reward decreased for only once.
-
-## Fanatic Model
+### Fanatic Model
 The fanatic model is similar to the weak belief model, except that it considers the 'current' label. As mentioned above, the coin can be labeled by using $fairness$. Because we have the number of flips and the number of heads, we can pre-label the coin as fair or cheat. We can use the pre-label to calculate the expected reward, instead of using the law of total probability. In formula,
 
 $$ P(\text{The next coin is head}) = \begin{cases}
@@ -77,13 +75,7 @@ p_{cheat} \ \ \ \ \ \text{o.w.}
 
 This model strongly depends on the posterior observation data, not considering the prior probability.
 
-## Sincere Fanatic Model
-Same as fanatic model, but it flips at least 5 times. The number 5 was set emprically.
-
-## Calm Fanatic Model
-Same as fanatic model, but it keep testing if the expected reward decreased for only once.
-
-## Belief Model
+### Belief Model
 The belief model is also simliar to the weak belief model, except that it considers $fairness$. The weak belief model estimates the probability of coin being fair to be $p_{coin}$. Instead, we may use $fairness$ since it also uses posterior observation data, expected to give better results. In formula,
 
 $$ \begin{align*} 
@@ -91,8 +83,8 @@ P(\text{The next coin is head}) &= P(\text{The coin is fair} \cap \text{The next
 &= fairness \times p_{fair} + (1 - fairness) \times p_{cheat}
 \end{align*} $$
 
-## Calm Belief Model
-Same as belief model, but it keep testing if the expected reward decreased for only once.
+## Calm Models
+There is huge uncertainty whether the coin is fair or biased, if the model met the end condition for the first time. Therefore calm models do not end testing if the end condition (the reward is expected to be decreased) is first met. When the end condition is again met, they end testing. If the remaining fund is 0 or it is 14th flip, it ends testing, since there is no more chances to flip.
 
 ## Model Result (After 10000 simulations)
 ![model result](model_test_result.PNG)
