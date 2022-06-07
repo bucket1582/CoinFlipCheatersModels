@@ -90,9 +90,9 @@ There is huge uncertainty whether the coin is fair or biased, if the model met t
 If there is huge uncertainty, it would be better to minimize the uncertainty. Thus, indecisive models uses significance level to label the coin. If fairness of coin is enoughly small or large that the model is certain that it is fair or biased, it label the coin.
 
 ### Basic Indecisive Model
-As mentioned above, indecisive model uses significance level to check the end condition. If
+As mentioned above, indecisive model uses significance level to check the end condition. Let $\alpha$ be the significance level. This significance level $\alpha$ is similar to those used in statistical hypothesis testing, but not exactly. If
 
-$$ fairness < significance_level \lor fairness > 1 - significance_level $$
+$$ fairness < \alpha \lor fairness > 1 - \alpha $$
 
 The model thinks that the coin is *certainly* fair or biased. Empirically significant level of 0.3 worked fine.
 
