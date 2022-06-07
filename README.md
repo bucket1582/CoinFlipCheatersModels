@@ -94,7 +94,7 @@ As mentioned above, indecisive model uses significance level to check the end co
 
 $$ fairness < \alpha \lor fairness > 1 - \alpha $$
 
-The model thinks that the coin is *certainly* fair or biased. Empirically significant level of 0.3 worked fine.
+The model is *certain* that the coin is either fair or biased. Empirically significant level of 0.3 worked fine.
 
 ### Indecisive Other Models
 For computing expected next reward, other than considering only for the next step, indecisive models consider every combinations that can occur. When considering every combinations, it computes expected reward if given fairness(n + k, x + l) (k for future flips, l for future heads) is signficant, and search further if given fairness is not significant.
