@@ -12,7 +12,7 @@ Let $n$ be the number of coin flips, $X$ be the number of heads, $p_{fair} = \df
 
 $$ fairness := P(\text{The coin is fair}|X = x) = \dfrac{b(x; n, p_{fair})p_{coin}}{b(x; n, p_{fair})p_{coin} + b(x; n, p_{cheat})(1 - p_{coin})} $$
 
-where $b(x; n, p)$ is the probability mass function of the binomial distribution. Since $ P(\text{The coin is unfair}|X = x) = 1 - fairness$, if $fairness > \dfrac{1}{2}$, we can conclude that the coin is more likely to be fair. Otherwise, we may conclude that the coin is more likely to be biased.
+where $b(x; n, p)$ is the probability mass function of the binomial distribution. Since $P(\text{The coin is unfair}|X = x) = 1 - fairness$, if $fairness > \dfrac{1}{2}$, we can conclude that the coin is more likely to be fair. Otherwise, we may conclude that the coin is more likely to be biased.
 
 If we label right, we get 1 point and 15 flipping chances. Otherwise we lose 30 flipping chances. Let's consider only the flipping chances. If we flip once, we lose 1 flipping chance. We may gain or lose flipping chances by labeling. Thus, we can evaluate the labeling process by below formula.
 
@@ -51,8 +51,8 @@ P(X = x) &= P(X = x \cap \text{The coin is fair}) + P(X = x \cap \text{The coin 
 ### Weak Belief Model
 The weak belief model tests a coin while the expected reward increases. Which means that we compare below two values.
 
-1. $$ \mathbb{E}[reward(n, x)] $$
-2. $$ P(\text{The next coin is head}) \times reward(n + 1, x + 1) + P(\text{The next coin is tail}) \times reward(n + 1, x) $$
+1. $$\mathbb{E}[reward(n, x)]$$
+2. $$P(\text{The next coin is head}) \times reward(n + 1, x + 1) + P(\text{The next coin is tail}) \times reward(n + 1, x)$$
 
 If the first value is greater than the second value, the reward expected to be decreased, thus we label the coin instantly. Otherwise, the reward expected to be increased, thus we flip once more.
 
